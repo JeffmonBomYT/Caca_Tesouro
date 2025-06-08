@@ -7,12 +7,11 @@ public class Sistema {
 
     String Mapa[][] = new String[8][8];
 
-
     public void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
                 Mapa[i][j] = "~";
-            }
+            } 
         }
     }
 
@@ -41,5 +40,18 @@ public class Sistema {
         
     }
 
+    //teste de randomizar os itens
+    public void Enterrar() {
+        int linha = rng.nextInt(Mapa.length);
+        int coluna = rng.nextInt(Mapa[0].length); 
+
+        String itemAleatorio = Mapa[linha][coluna];
+        
+        System.out.println("Item aleatório: " + itemAleatorio);
+    }
+
+
+
+    
 }
 
