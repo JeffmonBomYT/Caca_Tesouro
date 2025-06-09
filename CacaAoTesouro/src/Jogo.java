@@ -4,7 +4,8 @@ public class Jogo {
         Sistema sis = new Sistema();
 
         sis.CriarMapa();
-        sis.Enterrar();
+        sis.EnterrarTesouro();
+        sis.EnterrarArmadilha();
         sis.MostrarMapa();
 
 
