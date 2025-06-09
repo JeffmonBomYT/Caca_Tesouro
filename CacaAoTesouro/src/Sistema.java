@@ -67,8 +67,11 @@ public class Sistema {
             int coluna = rng.nextInt(Mapa[0].length); 
     
             for (int j = 0; j <= 5; j++){
-              Mapa[linha][coluna] = "a";
-            }             
+             
+               if (Mapa[linha][coluna] == null) {
+                Mapa[linha][coluna] = "a";
+               }
+               }             
         }
 
     }
