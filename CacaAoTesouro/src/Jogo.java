@@ -4,6 +4,7 @@ public class Jogo {
         Sistema sis = new Sistema();
 
         sis.CriarMapa();
+        sis.Enterrar();
         sis.MostrarMapa();
 
 

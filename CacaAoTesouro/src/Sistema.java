@@ -42,12 +42,17 @@ public class Sistema {
 
     //teste de randomizar os itens
     public void Enterrar() {
-        int linha = rng.nextInt(Mapa.length);
-        int coluna = rng.nextInt(Mapa[0].length); 
+        for (int i = 0; i <= 8; i++) {
+            int linha = rng.nextInt(Mapa.length);
+            int coluna = rng.nextInt(Mapa[0].length); 
+    
+            for (int j = 0; j <=8; j++){
+              Mapa[linha][coluna] = "t";
+            
+            }             
+        }
 
-        String itemAleatorio = Mapa[linha][coluna];
         
-        System.out.println("Item aleatório: " + itemAleatorio);
     }
 
 
