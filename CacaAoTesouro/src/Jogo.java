@@ -1,14 +1,28 @@
+import java.util.Scanner;
+
 public class Jogo {
 
     public static void main(String[] args) {
         Sistema sis = new Sistema();
+        Scanner scan = new Scanner(System.in);
+
+        int val1, val2;   
 
         sis.CriarMapa();
         sis.EnterrarTesouro();
         sis.EnterrarArmadilha();
         sis.MostrarMapa();
 
+        System.out.print("\n1º Valor > ");
+        val1 = scan.nextInt();
+        System.out.print("\n2º Valor > ");
+        val2 = scan.nextInt();
 
+        
+        //sis.Juntar(val1, val2);
+        
+        
+        
     }
 }
 

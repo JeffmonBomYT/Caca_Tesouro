@@ -5,9 +5,9 @@ public class Sistema {
     Random rng = new Random();
     Scanner scan = new Scanner(System.in);
 
-    byte a=9, b=9;
+    int a=9, b=9;
 
-
+    int Armadilhas[] = new int[5];
     String Mapa[][] = new String[8][8];
     
     //depois substituir "public" das funções por "private" e criar uma função Iniciar().
@@ -16,8 +16,11 @@ public class Sistema {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
                 Mapa[i][j] = "~";
+                
             } 
+            
         }
+        
     }
 
     public void MostrarMapa() {
@@ -40,14 +43,9 @@ public class Sistema {
     
     }
 
-    //verificar se A e B tem tesouro, armadilha ou areia
-    public void Tentativa(byte a, byte b) {
-        this.a = a;
-        this.b = b;
-        
-    }
 //__________________________________________________________________
     //teste de randomizar os itens
+    
     public void EnterrarTesouro() {
         for (int i = 0; i <= 8; i++) {
             int linha = rng.nextInt(Mapa.length);
@@ -57,25 +55,47 @@ public class Sistema {
               Mapa[linha][coluna] = "t";
             }             
         }
-
         
     }
 
     public void EnterrarArmadilha() {
-        for (int i = 0; i <= 5; i++) {
-            int linha = rng.nextInt(Mapa.length);
-            int coluna = rng.nextInt(Mapa[0].length); 
-    
-            for (int j = 0; j <= 5; j++){
-              Mapa[linha][coluna] = "a";
-            }             
-        }
 
+        for (int x = 0; x < Armadilhas.length; x++) {
+            for (int val : Armadilhas) {
+                if (Armadilhas[x] == val) {
+                    
+                }
+                else {
+                     for (int i = 0; i <= 5; i++) {
+                        int linha = rng.nextInt(Mapa.length);
+                        int coluna = rng.nextInt(Mapa[0].length); 
+                
+                        for (int j = 0; j <= 5; j++){
+                        Mapa[linha][coluna] = "a";
+                        Armadilhas[j] += Juntar(linha, coluna);
+                        }             
+                    }
+                }
+            }
+        }
+        
+       
+        
     }
 
-//precisa-se fazer verificação de dandomização, pois está sobrepondo
+//precisa-se fazer verificação da randomização, pois está sobrepondo
 
 //________________________________________________________________
+    public int Juntar(int a, int b) {
+        this.a = a;
+        this.b = b;
+
+        this.a *= 10;
+        int soma = this.a + this.b;
+        
+        return soma;
+    }
+
 
 
     
