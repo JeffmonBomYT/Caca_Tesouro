@@ -47,39 +47,35 @@ public class Sistema {
     //teste de randomizar os itens
     
     public void EnterrarTesouro() {
-        for (int i = 0; i <= 8; i++) {
-            int linha = rng.nextInt(Mapa.length);
-            int coluna = rng.nextInt(Mapa[0].length); 
-    
-            for (int j = 0; j <=8; j++){
-              Mapa[linha][coluna] = "t";
-            }             
+        for (int i = 0; i <= 7; i++) {
+           int linha;
+           int coluna;
+           do {
+            linha = rng.nextInt(Mapa.length);
+            coluna = rng.nextInt(Mapa.length);
+           }
+           while (!Mapa[linha][coluna].equals("~"));
+           
+           Mapa[linha][coluna] = "t";           
         }
+
+        
         
     }
 
     public void EnterrarArmadilha() {
-
-        for (int x = 0; x < Armadilhas.length; x++) {
-            for (int val : Armadilhas) {
-                if (Armadilhas[x] == val) {
-                    
-                }
-                else {
-                     for (int i = 0; i <= 5; i++) {
-                        int linha = rng.nextInt(Mapa.length);
-                        int coluna = rng.nextInt(Mapa[0].length); 
-                
-                        for (int j = 0; j <= 5; j++){
-                        Mapa[linha][coluna] = "a";
-                        Armadilhas[j] += Juntar(linha, coluna);
-                        }             
-                    }
-                }
-            }
+        for (int i = 0; i <= 4; i++) {
+           int linha;
+           int coluna;
+           do {
+            linha = rng.nextInt(Mapa.length);
+            coluna = rng.nextInt(Mapa.length);
+           }
+           while (!Mapa[linha][coluna].equals("~"));
+           
+           Mapa[linha][coluna] = "a";           
         }
         
-       
         
     }
 
@@ -92,7 +88,7 @@ public class Sistema {
 
         this.a *= 10;
         int soma = this.a + this.b;
-        
+
         return soma;
     }
 
