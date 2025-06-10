@@ -1,30 +1,26 @@
-import java.util.Scanner;
-
 public class Jogo {
 
     public static void main(String[] args) {
         Sistema sis = new Sistema();
-        Scanner scan = new Scanner(System.in);
-
-        int PA, PB;   
-
-        sis.CriarMapa();
-        sis.EnterrarTesouro();
-        sis.EnterrarArmadilha();
-        sis.MostrarMapa();
-
-        System.out.print("\nColuna > ");
-        PA = scan.nextInt();
-        System.out.print("\nLinha > ");
-        PB = scan.nextInt();
-
-        sis.Juntar(PA, PB);
-        sis.Verificar(PA, PB);
-
-        sis.MostrarMapa();
         
+        boolean over = true;
+
+        sis.Iniciar();
+
+        while (over) {
+            if (sis.armadilhaEncontrada < 5 && sis.tesouroEncontrado < 8 && sis.tentativa < 25) {
+                sis.mostrar();
+            }
+            else {
+                over = false;
+            }
         
-        
+        }
+
+       sis.Pontuacao();
+
+
+
     }
 }
 

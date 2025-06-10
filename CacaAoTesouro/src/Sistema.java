@@ -5,38 +5,48 @@ public class Sistema {
     Random rng = new Random();
     Scanner scan = new Scanner(System.in);
 
-    int PA, PB;
-    int pontos;
+    int pontos, PA, PB;
+    int tesouroEncontrado=0, armadilhaEncontrada=0, tentativa=0;
 
     int Armadilhas[] = new int[5];
     int Tesouros[] = new int[8];
     String Mapa[][] = new String[8][8];
     //         Li Co
-    
-    //depois substituir "public" das funções por "private" e criar uma função Iniciar().
-    /*
 
+//________________________________________________________________
     public void Iniciar() {
         CriarMapa();
         EnterrarTesouro();
         EnterrarArmadilha();
-        MostrarMapa();
     }
+//________________________________________________________________
+    public void mostrar() {
+        MostrarMapa();
+        
+        System.out.print("\nColuna > ");
+        PA = scan.nextInt();
+        System.out.print("\nLinha > ");
+        PB = scan.nextInt();
 
-     */ 
-    
-    public void CriarMapa() {
+        if (PA < 0 || PA >= 8 || PB < 0 || PB >= 8) {
+            System.out.println("Entrada inválida");
+            return;
+        }
+
+        Juntar(PA, PB);
+        Verificar(PA, PB);
+    }
+//________________________________________________________________    
+    private void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
-                Mapa[i][j] = "~";
-                
+                Mapa[i][j] = "~";      
             } 
-            
         }
         
     }
-
-    public void MostrarMapa() {
+//________________________________________________________________
+    private void MostrarMapa() {
         System.out.print("\n   "); 
 
         for (int coluna = 0; coluna < Mapa[0].length; coluna++) {
@@ -55,11 +65,8 @@ public class Sistema {
         }
     
     }
-
-//__________________________________________________________________
-    //teste de randomizar os itens
-    
-    public void EnterrarTesouro() {
+//________________________________________________________________
+    private void EnterrarTesouro() {
         for (int i = 0; i <= 7; i++) {
             int linha;
             int coluna;
@@ -73,8 +80,8 @@ public class Sistema {
         }
 
     }
-
-    public void EnterrarArmadilha() {
+//________________________________________________________________
+    private void EnterrarArmadilha() {
         for (int i = 0; i <= 4; i++) {
            int linha;
            int coluna;
@@ -89,10 +96,8 @@ public class Sistema {
         
     }
 
-
-
 //________________________________________________________________
-    public int Juntar(int PA, int PB) {
+    private int Juntar(int PA, int PB) {
         this.PA = PA;
         this.PB = PB;
 
@@ -101,47 +106,90 @@ public class Sistema {
         return soma;
     } 
 
-    public void Verificar(int PA, int PB) {
+    private void Verificar(int PA, int PB) {
         boolean achou = false;
         int pmp = Juntar(PA, PB);
-            
-        if (PA < 0 || PA > 7 && PB < 0 || PB > 7) {
-            System.out.println("Entrada inválida");
-        }
 
-        for (int i = 0; i < Armadilhas.length; i++) {
-            if (pmp == Armadilhas[i]) {
-                Mapa[PB][PA] = "A";
-                pontos-=5;
-                System.out.println("\nAchou uma armadilha");
-                System.out.println("Pontuação total > "+pontos);
-                achou = true;
-                break;
+        if (!Mapa[PA][PB].equals("A")) {
+            for (int i = 0; i < Armadilhas.length; i++) {
+                if (pmp == Armadilhas[i]) {
+                    Mapa[PB][PA] = "A";
+                    pontos-=5;
+                    System.out.println("\nAchou uma armadilha");
+                    System.out.println("Pontuação total > "+pontos);
+                    tentativa++;
+                    armadilhaEncontrada++;
+                    achou = true;
+                    break;
+                }
             }
-           
         }
-
-        for (int i2 = 0; i2 < Tesouros.length; i2++) {
-            if (pmp == Tesouros[i2]) {
-                Mapa[PB][PA] = "T";
-                pontos+=10;
-                System.out.println("\nParabéns, Tesouro encontrado!");
-                System.out.println("Pontuação total > "+pontos);
-                achou = true;
-                break;
+        else {
+            System.out.println("Coordenada já utilizada.");
+        }
+        
+        if (!Mapa[PA][PB].equals("T")) {
+            for (int i2 = 0; i2 < Tesouros.length; i2++) {
+                if (pmp == Tesouros[i2]) {
+                    Mapa[PB][PA] = "T";
+                    pontos+=10;
+                    System.out.println("\nParabéns, Tesouro encontrado!");
+                    System.out.println("Pontuação total > "+pontos);
+                    tentativa++;
+                    tesouroEncontrado++;
+                    achou = true;
+                    break;
+                }
+                
             }
-            
+        }
+        else {
+            System.out.println("Coordenada já utilizada.");
         }
 
-        if (!achou) {
-            System.out.println("\nApenas areia...");      
-        } 
-
-      
+        if (!Mapa[PA][PB].equals("O")) {
+            if (!achou) {
+                System.out.println("\nApenas areia..."); 
+                Mapa[PA][PB] = "O";    
+                tentativa++; 
+            } 
+        }
+        else {
+            System.out.println("Coordenada já utilizada.");
+        }
 
     }
+//________________________________________________________________
 
+    public void Pontuacao() {
 
+        System.out.println("\nNível de explorador > ");
+
+        if (pontos < 30) {
+            System.out.println("Precisa de mais prática na exploração");
+            System.out.println("Pontos > "+pontos);
+        }
+        else if (pontos >= 30 && pontos <= 49) {
+            System.out.println("Aventureiro Iniciante");
+            System.out.println("Pontos > "+pontos);
+        }
+        else if (pontos >= 50 && pontos <= 69) {
+            System.out.println("Caçador de Tesouros Experiente!");
+            System.out.println("Pontos > "+pontos);
+        }
+        else if (pontos >= 70) {
+            System.out.println("Explorador Lendário!");
+            System.out.println("Pontos > "+pontos);
+        }   
+        
+    }
+//________________________________________________________________
     
+
+
+
+
+
+
 }
 
