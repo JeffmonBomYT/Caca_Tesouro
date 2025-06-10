@@ -10,6 +10,7 @@ public class Sistema {
 
     int Armadilhas[] = new int[5];
     int Tesouros[] = new int[8];
+    String MapaDesvendado[][] = new String[8][8];
     String Mapa[][] = new String[8][8];
     //         Li Co
 
@@ -40,7 +41,8 @@ public class Sistema {
     private void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
-                Mapa[i][j] = "~";      
+                Mapa[i][j] = "~";  
+                MapaDesvendado[i][j] = "~";   
             } 
         }
         
@@ -60,6 +62,26 @@ public class Sistema {
 
             for (int j = 0; j < Mapa[i].length; j++) {
                 System.out.print(Mapa[i][j] + " ");
+            }
+            System.out.println();
+        }
+    
+    }
+//________________________________________________________________
+    public void MostrarMapaDesvendado() {
+        System.out.print("\n   "); 
+
+        for (int coluna = 0; coluna < MapaDesvendado[0].length; coluna++) {
+            System.out.print(coluna + " ");
+        }
+
+        System.out.println();
+
+        for (int i = 0; i < MapaDesvendado.length; i++) {
+            System.out.print(i + "  ");
+
+            for (int j = 0; j < MapaDesvendado[i].length; j++) {
+                System.out.print(MapaDesvendado[i][j] + " ");
             }
             System.out.println();
         }
@@ -105,7 +127,7 @@ public class Sistema {
 
         return soma;
     } 
-
+//________________________________________________________________
     private void Verificar(int PA, int PB) {
         boolean achou = false;
         int pmp = Juntar(PA, PB);
@@ -114,6 +136,7 @@ public class Sistema {
             for (int i = 0; i < Armadilhas.length; i++) {
                 if (pmp == Armadilhas[i]) {
                     Mapa[PB][PA] = "A";
+                    MapaDesvendado[PA][PB] = "a";
                     pontos-=5;
                     System.out.println("\nAchou uma armadilha");
                     System.out.println("Pontuação total > "+pontos);
@@ -132,6 +155,7 @@ public class Sistema {
             for (int i2 = 0; i2 < Tesouros.length; i2++) {
                 if (pmp == Tesouros[i2]) {
                     Mapa[PB][PA] = "T";
+                    MapaDesvendado[PA][PB] = "t";
                     pontos+=10;
                     System.out.println("\nParabéns, Tesouro encontrado!");
                     System.out.println("Pontuação total > "+pontos);
@@ -150,7 +174,8 @@ public class Sistema {
         if (!Mapa[PA][PB].equals("O")) {
             if (!achou) {
                 System.out.println("\nApenas areia..."); 
-                Mapa[PA][PB] = "O";    
+                Mapa[PA][PB] = "O"; 
+                MapaDesvendado[PA][PB] = "o";   
                 tentativa++; 
             } 
         }
@@ -184,7 +209,7 @@ public class Sistema {
         
     }
 //________________________________________________________________
-    
+
 
 
 

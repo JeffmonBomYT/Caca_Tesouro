@@ -17,9 +17,9 @@ public class Jogo {
         
         }
 
-       sis.Pontuacao();
+        sis.Pontuacao();
 
-
+        sis.MostrarMapaDesvendado();
 
     }
 }
