@@ -5,12 +5,11 @@ public class Sistema {
     Random rng = new Random();
     Scanner scan = new Scanner(System.in);
 
-    int pontos, PA, PB;
+    int pontos=0, PA, PB;
     int tesouroEncontrado=0, armadilhaEncontrada=0, tentativa=0;
 
     int Armadilhas[] = new int[5];
     int Tesouros[] = new int[8];
-    String MapaDesvendado[][] = new String[8][8];
     String Mapa[][] = new String[8][8];
     //         Li Co
 
@@ -21,7 +20,8 @@ public class Sistema {
         EnterrarArmadilha();
     }
 //________________________________________________________________
-    public void mostrar() {
+    public void Mostrar() {
+
         MostrarMapa();
         
         System.out.print("\nColuna > ");
@@ -41,8 +41,7 @@ public class Sistema {
     private void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
-                Mapa[i][j] = "~";  
-                MapaDesvendado[i][j] = "~";   
+                Mapa[i][j] = "~";                  
             } 
         }
         
@@ -65,27 +64,25 @@ public class Sistema {
             }
             System.out.println();
         }
+
+        
     
     }
 //________________________________________________________________
     public void MostrarMapaDesvendado() {
         System.out.print("\n   "); 
 
-        for (int coluna = 0; coluna < MapaDesvendado[0].length; coluna++) {
-            System.out.print(coluna + " ");
+        for (int i = 0; i < Armadilhas.length; i++) {
+            int[] valor = separar(Armadilhas[i]);
+            Mapa[valor[0]][valor[1]] = "a";
         }
-
-        System.out.println();
-
-        for (int i = 0; i < MapaDesvendado.length; i++) {
-            System.out.print(i + "  ");
-
-            for (int j = 0; j < MapaDesvendado[i].length; j++) {
-                System.out.print(MapaDesvendado[i][j] + " ");
-            }
-            System.out.println();
+        for (int i = 0; i < Tesouros.length; i++) {
+            int[] valor = separar(Tesouros[i]);
+            Mapa[valor[0]][valor[1]] = "t";
         }
     
+        MostrarMapa();
+
     }
 //________________________________________________________________
     private void EnterrarTesouro() {
@@ -98,7 +95,7 @@ public class Sistema {
             } while (!Mapa[linha][coluna].equals("~"));
             
             Tesouros[i] = (linha * 10) + coluna;
-            //Mapa[linha][coluna] = "T";       
+            //Mapa[linha][coluna] = "T";   
         }
 
     }
@@ -113,7 +110,7 @@ public class Sistema {
            } while (!Mapa[linha][coluna].equals("~"));
 
            Armadilhas[i] = (linha * 10) + coluna;
-           //Mapa[linha][coluna] = "A";      
+           //Mapa[linha][coluna] = "A";     
         }
         
     }
@@ -128,16 +125,19 @@ public class Sistema {
         return soma;
     } 
 //________________________________________________________________
+    public int[] separar(int val) {
+        return new int[]{val / 10, val % 10};
+    }
+//________________________________________________________________
     private void Verificar(int PA, int PB) {
         boolean achou = false;
         int pmp = Juntar(PA, PB);
 
-        if (!Mapa[PA][PB].equals("A")) {
+        if (!Mapa[PB][PA].equals("A")) {
             for (int i = 0; i < Armadilhas.length; i++) {
                 if (pmp == Armadilhas[i]) {
                     Mapa[PB][PA] = "A";
-                    MapaDesvendado[PA][PB] = "a";
-                    pontos-=5;
+                    pontos -= 5;
                     System.out.println("\nAchou uma armadilha");
                     System.out.println("Pontuação total > "+pontos);
                     tentativa++;
@@ -151,12 +151,11 @@ public class Sistema {
             System.out.println("Coordenada já utilizada.");
         }
         
-        if (!Mapa[PA][PB].equals("T")) {
+        if (!Mapa[PB][PA].equals("T")) {
             for (int i2 = 0; i2 < Tesouros.length; i2++) {
                 if (pmp == Tesouros[i2]) {
                     Mapa[PB][PA] = "T";
-                    MapaDesvendado[PA][PB] = "t";
-                    pontos+=10;
+                    pontos += 10;
                     System.out.println("\nParabéns, Tesouro encontrado!");
                     System.out.println("Pontuação total > "+pontos);
                     tentativa++;
@@ -171,11 +170,10 @@ public class Sistema {
             System.out.println("Coordenada já utilizada.");
         }
 
-        if (!Mapa[PA][PB].equals("O")) {
+        if (!Mapa[PB][PA].equals("O")) {
             if (!achou) {
                 System.out.println("\nApenas areia..."); 
-                Mapa[PA][PB] = "O"; 
-                MapaDesvendado[PA][PB] = "o";   
+                Mapa[PB][PA] = "O";  
                 tentativa++; 
             } 
         }
@@ -191,18 +189,22 @@ public class Sistema {
         System.out.println("\nNível de explorador > ");
 
         if (pontos < 30) {
+            System.out.println("\n[QUE PENA, VOCÊ PERDEU]");
             System.out.println("Precisa de mais prática na exploração");
             System.out.println("Pontos > "+pontos);
         }
         else if (pontos >= 30 && pontos <= 49) {
+            System.out.println("\n[QUE PENA, VOCÊ PERDEU]");
             System.out.println("Aventureiro Iniciante");
             System.out.println("Pontos > "+pontos);
         }
         else if (pontos >= 50 && pontos <= 69) {
+            System.out.println("\n[QUE PENA, VOCÊ PERDEU]");
             System.out.println("Caçador de Tesouros Experiente!");
             System.out.println("Pontos > "+pontos);
         }
         else if (pontos >= 70) {
+            System.out.println("\n[PARABÉNS, VOCÊ VENCEU]");
             System.out.println("Explorador Lendário!");
             System.out.println("Pontos > "+pontos);
         }   

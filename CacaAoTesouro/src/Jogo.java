@@ -8,8 +8,8 @@ public class Jogo {
         sis.Iniciar();
 
         while (over) {
-            if (sis.armadilhaEncontrada < 5 && sis.tesouroEncontrado < 8 && sis.tentativa < 25) {
-                sis.mostrar();
+            if (sis.armadilhaEncontrada < 5 && sis.tesouroEncontrado < 8 && sis.tentativa <= 10) {
+                sis.Mostrar();
             }
             else {
                 over = false;
