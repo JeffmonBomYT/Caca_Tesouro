@@ -5,9 +5,11 @@ public class Sistema {
     Random rng = new Random();
     Scanner scan = new Scanner(System.in);
 
-    int PA, PB, temp;
+    int PA, PB;
+    int pontos;
 
-    int pontoEspecifico[][] = new int[8][8];
+    int Armadilhas[] = new int[5];
+    int Tesouros[] = new int[8];
     String Mapa[][] = new String[8][8];
     //         Li Co
     
@@ -35,7 +37,7 @@ public class Sistema {
     }
 
     public void MostrarMapa() {
-        System.out.print("   "); 
+        System.out.print("\n   "); 
 
         for (int coluna = 0; coluna < Mapa[0].length; coluna++) {
             System.out.print(coluna + " ");
@@ -59,15 +61,15 @@ public class Sistema {
     
     public void EnterrarTesouro() {
         for (int i = 0; i <= 7; i++) {
-           int linha;
-           int coluna;
-           do {
-            linha = rng.nextInt(Mapa.length);
-            coluna = rng.nextInt(Mapa.length);
-           } while (!Mapa[linha][coluna].equals("~"));
-           
-           temp = (linha * 10) + coluna;
-           Mapa[linha][coluna] = "t";       
+            int linha;
+            int coluna;
+            do {
+                linha = rng.nextInt(Mapa.length);
+                coluna = rng.nextInt(Mapa.length);
+            } while (!Mapa[linha][coluna].equals("~"));
+            
+            Tesouros[i] = (linha * 10) + coluna;
+            //Mapa[linha][coluna] = "T";       
         }
 
     }
@@ -80,9 +82,9 @@ public class Sistema {
             linha = rng.nextInt(Mapa.length);
             coluna = rng.nextInt(Mapa.length);
            } while (!Mapa[linha][coluna].equals("~"));
-           
-           temp = (linha * 10) + coluna;
-           Mapa[linha][coluna] = "a";      
+
+           Armadilhas[i] = (linha * 10) + coluna;
+           //Mapa[linha][coluna] = "A";      
         }
         
     }
@@ -90,23 +92,54 @@ public class Sistema {
 
 
 //________________________________________________________________
-     public void Juntar(int PA, int PB) {
+    public int Juntar(int PA, int PB) {
         this.PA = PA;
         this.PB = PB;
 
         int soma = (PA * 10) + PB;
 
+        return soma;
+    } 
+
+    public void Verificar(int PA, int PB) {
+        boolean achou = false;
+        int pmp = Juntar(PA, PB);
+            
         if (PA < 0 || PA > 7 && PB < 0 || PB > 7) {
             System.out.println("Entrada inválida");
-            return;
         }
-        else {
+
+        for (int i = 0; i < Armadilhas.length; i++) {
+            if (pmp == Armadilhas[i]) {
+                Mapa[PB][PA] = "A";
+                pontos-=5;
+                System.out.println("\nAchou uma armadilha");
+                System.out.println("Pontuação total > "+pontos);
+                achou = true;
+                break;
+            }
+           
+        }
+
+        for (int i2 = 0; i2 < Tesouros.length; i2++) {
+            if (pmp == Tesouros[i2]) {
+                Mapa[PB][PA] = "T";
+                pontos+=10;
+                System.out.println("\nParabéns, Tesouro encontrado!");
+                System.out.println("Pontuação total > "+pontos);
+                achou = true;
+                break;
+            }
             
         }
 
+        if (!achou) {
+            System.out.println("\nApenas areia...");      
+        } 
 
-    } 
+      
 
+    }
 
 
     

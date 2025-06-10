@@ -13,12 +13,13 @@ public class Jogo {
         sis.EnterrarArmadilha();
         sis.MostrarMapa();
 
-        System.out.print("\nLinha > ");
-        PA = scan.nextInt();
         System.out.print("\nColuna > ");
+        PA = scan.nextInt();
+        System.out.print("\nLinha > ");
         PB = scan.nextInt();
 
         sis.Juntar(PA, PB);
+        sis.Verificar(PA, PB);
 
         sis.MostrarMapa();
         
