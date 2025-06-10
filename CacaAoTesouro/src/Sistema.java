@@ -5,12 +5,23 @@ public class Sistema {
     Random rng = new Random();
     Scanner scan = new Scanner(System.in);
 
-    int a=9, b=9;
+    int PA, PB, temp;
 
-    int Armadilhas[] = new int[5];
+    int pontoEspecifico[][] = new int[8][8];
     String Mapa[][] = new String[8][8];
+    //         Li Co
     
     //depois substituir "public" das funções por "private" e criar uma função Iniciar().
+    /*
+
+    public void Iniciar() {
+        CriarMapa();
+        EnterrarTesouro();
+        EnterrarArmadilha();
+        MostrarMapa();
+    }
+
+     */ 
     
     public void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
@@ -53,14 +64,12 @@ public class Sistema {
            do {
             linha = rng.nextInt(Mapa.length);
             coluna = rng.nextInt(Mapa.length);
-           }
-           while (!Mapa[linha][coluna].equals("~"));
+           } while (!Mapa[linha][coluna].equals("~"));
            
-           Mapa[linha][coluna] = "t";           
+           temp = (linha * 10) + coluna;
+           Mapa[linha][coluna] = "t";       
         }
 
-        
-        
     }
 
     public void EnterrarArmadilha() {
@@ -70,27 +79,33 @@ public class Sistema {
            do {
             linha = rng.nextInt(Mapa.length);
             coluna = rng.nextInt(Mapa.length);
-           }
-           while (!Mapa[linha][coluna].equals("~"));
+           } while (!Mapa[linha][coluna].equals("~"));
            
-           Mapa[linha][coluna] = "a";           
+           temp = (linha * 10) + coluna;
+           Mapa[linha][coluna] = "a";      
         }
         
-        
     }
 
-//precisa-se fazer verificação da randomização, pois está sobrepondo
+
 
 //________________________________________________________________
-    public int Juntar(int a, int b) {
-        this.a = a;
-        this.b = b;
+     public void Juntar(int PA, int PB) {
+        this.PA = PA;
+        this.PB = PB;
 
-        this.a *= 10;
-        int soma = this.a + this.b;
+        int soma = (PA * 10) + PB;
 
-        return soma;
-    }
+        if (PA < 0 || PA > 7 && PB < 0 || PB > 7) {
+            System.out.println("Entrada inválida");
+            return;
+        }
+        else {
+            
+        }
+
+
+    } 
 
 
 

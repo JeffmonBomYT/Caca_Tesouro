@@ -6,20 +6,21 @@ public class Jogo {
         Sistema sis = new Sistema();
         Scanner scan = new Scanner(System.in);
 
-        int val1, val2;   
+        int PA, PB;   
 
         sis.CriarMapa();
         sis.EnterrarTesouro();
         sis.EnterrarArmadilha();
         sis.MostrarMapa();
 
-        System.out.print("\n1º Valor > ");
-        val1 = scan.nextInt();
-        System.out.print("\n2º Valor > ");
-        val2 = scan.nextInt();
+        System.out.print("\nLinha > ");
+        PA = scan.nextInt();
+        System.out.print("\nColuna > ");
+        PB = scan.nextInt();
 
-        
-        //sis.Juntar(val1, val2);
+        sis.Juntar(PA, PB);
+
+        sis.MostrarMapa();
         
         
         
