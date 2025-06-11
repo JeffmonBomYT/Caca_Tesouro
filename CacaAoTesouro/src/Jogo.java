@@ -29,8 +29,8 @@ public class Jogo {
 
             if (sis.pontos < 70) {
                 sis.Pontuacao();
-                //sis.MostrarMapaDesvendado();
-                sis.fim();
+                sis.MostrarMapaDesvendado();
+                
             }
             else {
                 sis.Pontuacao();  
