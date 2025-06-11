@@ -75,11 +75,11 @@ public class Sistema {
 
         for (int i = 0; i < Armadilhas.length; i++) {
             int[] valor = separar(Armadilhas[i]);
-            Mapa[valor[0]][valor[1]] = "a";
+            Mapa[valor[1]][valor[0]] = "a";
         }
         for (int i = 0; i < Tesouros.length; i++) {
             int[] valor = separar(Tesouros[i]);
-            Mapa[valor[0]][valor[1]] = "t";
+            Mapa[valor[1]][valor[0]] = "t";
         }
     
         MostrarMapa();
@@ -96,22 +96,25 @@ public class Sistema {
             } while (!Mapa[linha][coluna].equals("~"));
             
             Tesouros[i] = (linha * 10) + coluna;
-            //Mapa[linha][coluna] = "T";   
+            //Mapa[linha][coluna] = "T"; 
+            
+            //usar pra printar "tela de vitória"
+            //System.out.println(Tesouros[i]);
         }
 
     }
 //________________________________________________________________
     public void EnterrarArmadilha() {
         for (int i = 0; i <= 4; i++) {
-           int linha;
-           int coluna;
-           do {
-            linha = rng.nextInt(Mapa.length);
-            coluna = rng.nextInt(Mapa.length);
-           } while (!Mapa[linha][coluna].equals("~"));
+            int linha;
+            int coluna;
+            do {
+                linha = rng.nextInt(Mapa.length);
+                coluna = rng.nextInt(Mapa.length);
+            } while (!Mapa[linha][coluna].equals("~"));
 
-           Armadilhas[i] = (linha * 10) + coluna;
-           //Mapa[linha][coluna] = "A";     
+            Armadilhas[i] = (linha * 10) + coluna;
+            //Mapa[linha][coluna] = "A";     
         }
         
     }
