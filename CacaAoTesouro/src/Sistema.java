@@ -39,7 +39,7 @@ public class Sistema {
         Verificar(PA, PB);
     }
 //________________________________________________________________    
-    public void CriarMapa() {
+    private void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
                 Mapa[i][j] = "~";                        
@@ -48,7 +48,7 @@ public class Sistema {
         
     }
 //________________________________________________________________
-    public void MostrarMapa() {
+    private void MostrarMapa() {
         System.out.print("\n   "); 
 
         for (int coluna = 0; coluna < Mapa[0].length; coluna++) {
@@ -71,22 +71,28 @@ public class Sistema {
     }
 //________________________________________________________________
     public void MostrarMapaDesvendado() {
-        System.out.print("   "); 
+
+        System.out.println("\n--------------------------");
+        System.out.println("Objetivos não encontrados");
 
         for (int i = 0; i < Armadilhas.length; i++) {
             int[] valor = separar(Armadilhas[i]);
-            Mapa[valor[1]][valor[0]] = "a";
+            if (!Mapa[valor[1]][valor[0]].equals("A")) { 
+                Mapa[valor[1]][valor[0]] = "a";
+            }
         }
         for (int i = 0; i < Tesouros.length; i++) {
             int[] valor = separar(Tesouros[i]);
-            Mapa[valor[1]][valor[0]] = "t";
+            if (!Mapa[valor[1]][valor[0]].equals("T")) {
+                Mapa[valor[1]][valor[0]] = "t";
+            }
+        
         }
     
         MostrarMapa();
-
     }
 //________________________________________________________________
-    public void EnterrarTesouro() {
+    private void EnterrarTesouro() {
         for (int i = 0; i <= 7; i++) {
             int linha;
             int coluna;
@@ -104,7 +110,7 @@ public class Sistema {
 
     }
 //________________________________________________________________
-    public void EnterrarArmadilha() {
+    private void EnterrarArmadilha() {
         for (int i = 0; i <= 4; i++) {
             int linha;
             int coluna;
@@ -120,7 +126,7 @@ public class Sistema {
     }
 
 //________________________________________________________________
-    public int Juntar(int PA, int PB) {
+    private int Juntar(int PA, int PB) {
         this.PA = PA;
         this.PB = PB;
 
@@ -129,11 +135,11 @@ public class Sistema {
         return soma;
     } 
 //________________________________________________________________
-    public int[] separar(int val) {
+    private int[] separar(int val) {
         return new int[]{val / 10, val % 10};
     }
 //________________________________________________________________
-    public void Verificar(int PA, int PB) {
+    private void Verificar(int PA, int PB) {
         boolean achou = false;
         int pmp = Juntar(PA, PB);
 
@@ -191,32 +197,38 @@ public class Sistema {
 
     }
 //________________________________________________________________
-
     public void Pontuacao() {
+        
+        int rank = 0;
 
-        System.out.println("\nNível de explorador > ");
-
+        
         if (pontos < 30) {
             System.out.println("\n[QUE PENA, VOCÊ PERDEU]");
             System.out.println("Precisa de mais prática na exploração");
             System.out.println("Pontos > "+pontos);
+            rank = 1;
         }
         else if (pontos >= 30 && pontos <= 49) {
             System.out.println("\n[QUE PENA, VOCÊ PERDEU]");
             System.out.println("Aventureiro Iniciante");
             System.out.println("Pontos > "+pontos);
+            rank = 2;
         }
         else if (pontos >= 50 && pontos <= 69) {
             System.out.println("\n[QUE PENA, VOCÊ PERDEU]");
             System.out.println("Caçador de Tesouros Experiente!");
             System.out.println("Pontos > "+pontos);
+            rank = 3;
         }
         else if (pontos >= 70) {
             System.out.println("\n[PARABÉNS, VOCÊ VENCEU]");
             System.out.println("Explorador Lendário!");
             System.out.println("Pontos > "+pontos);
+            rank = 4;
         }   
         
+        System.out.println("\nRank de explorador > ("+rank+")");
+
     }
 //________________________________________________________________
    

@@ -30,7 +30,6 @@ public class Jogo {
             if (sis.pontos < 70) {
                 sis.Pontuacao();
                 sis.MostrarMapaDesvendado();
-                
             }
             else {
                 sis.Pontuacao();  
@@ -38,7 +37,7 @@ public class Jogo {
             
         }
         else if (opc.equals("n")) {
-            System.out.println("\nAté a próxima.");
+            System.out.println("\nAté mais.");
             System.exit(1);
         }
         
