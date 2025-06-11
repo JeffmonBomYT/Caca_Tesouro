@@ -10,6 +10,7 @@ public class Sistema {
 
     int Armadilhas[] = new int[5];
     int Tesouros[] = new int[8];
+    String MapaFim[][] = new String[8][8];
     String Mapa[][] = new String[8][8];
     //         Li Co
 
@@ -41,7 +42,7 @@ public class Sistema {
     public void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
-                Mapa[i][j] = "~";                  
+                Mapa[i][j] = "~";                        
             } 
         }
         
@@ -215,7 +216,27 @@ public class Sistema {
         
     }
 //________________________________________________________________
+    public void fim() {
+        System.out.println("\nFim de jogo!");
+        System.out.println("Campo final com todos os 'A' e 'T' revelados:");
 
+        for (int i = 0; i < Mapa.length; i++) {
+            for (int j = 0; j < Mapa[i].length; j++) {
+                if (MapaFim[i][j].equals("~") && (Mapa[i][j].equals("A") || Mapa[i][j].equals("T"))) {
+                    MapaFim[i][j] = Mapa[i][j];
+                }
+            }
+        }
+
+        // Exibir o campo final
+        for (int i = 0; i < MapaFim.length; i++) {
+            for (int j = 0; j < MapaFim[i].length; j++) {
+                System.out.print(MapaFim[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }
 
 
 
