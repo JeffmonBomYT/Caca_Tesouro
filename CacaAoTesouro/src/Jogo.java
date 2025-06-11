@@ -1,25 +1,46 @@
+
+import java.util.Scanner;
+
 public class Jogo {
 
     public static void main(String[] args) {
         Sistema sis = new Sistema();
+        Scanner scan = new Scanner(System.in);
         
         boolean over = true;
 
-        sis.Iniciar();
+        System.out.println("\nDesejas jogar [Caça Relíquias]");
+        System.out.print("\n(S/N) > ");
+        String opc = scan.next().toLowerCase();
 
-        while (over) {
-            if (sis.armadilhaEncontrada < 5 && sis.tesouroEncontrado < 8 && sis.tentativa <= 10) {
-                sis.Mostrar();
+        if (opc.equals("s")) {
+            System.out.println("\nBem vindo ao [Caça Relíquias]");
+            sis.Iniciar();
+
+            while (over) {
+                if (sis.armadilhaEncontrada < 5 && sis.tesouroEncontrado < 8 && sis.tentativa <= 24) {
+                    sis.Mostrar();
+                }
+                else {
+                    over = false;
+                }
+            
+            }
+
+            if (sis.pontos < 70) {
+                sis.Pontuacao();
+                sis.MostrarMapaDesvendado();
             }
             else {
-                over = false;
+                sis.Pontuacao();  
             }
-        
+            
         }
-
-        sis.Pontuacao();
-
-        sis.MostrarMapaDesvendado();
+        else if (opc.equals("n")) {
+            System.out.println("\nAté a próxima.");
+            System.exit(1);
+        }
+        
 
     }
 }

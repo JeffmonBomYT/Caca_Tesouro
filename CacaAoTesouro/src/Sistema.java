@@ -38,7 +38,7 @@ public class Sistema {
         Verificar(PA, PB);
     }
 //________________________________________________________________    
-    private void CriarMapa() {
+    public void CriarMapa() {
         for (int i = 0; i < Mapa.length; i++) {
             for (int j = 0; j < Mapa[i].length; j++) {
                 Mapa[i][j] = "~";                  
@@ -47,7 +47,7 @@ public class Sistema {
         
     }
 //________________________________________________________________
-    private void MostrarMapa() {
+    public void MostrarMapa() {
         System.out.print("\n   "); 
 
         for (int coluna = 0; coluna < Mapa[0].length; coluna++) {
@@ -70,7 +70,7 @@ public class Sistema {
     }
 //________________________________________________________________
     public void MostrarMapaDesvendado() {
-        System.out.print("\n   "); 
+        System.out.print("   "); 
 
         for (int i = 0; i < Armadilhas.length; i++) {
             int[] valor = separar(Armadilhas[i]);
@@ -85,7 +85,7 @@ public class Sistema {
 
     }
 //________________________________________________________________
-    private void EnterrarTesouro() {
+    public void EnterrarTesouro() {
         for (int i = 0; i <= 7; i++) {
             int linha;
             int coluna;
@@ -100,7 +100,7 @@ public class Sistema {
 
     }
 //________________________________________________________________
-    private void EnterrarArmadilha() {
+    public void EnterrarArmadilha() {
         for (int i = 0; i <= 4; i++) {
            int linha;
            int coluna;
@@ -116,7 +116,7 @@ public class Sistema {
     }
 
 //________________________________________________________________
-    private int Juntar(int PA, int PB) {
+    public int Juntar(int PA, int PB) {
         this.PA = PA;
         this.PB = PB;
 
@@ -129,10 +129,11 @@ public class Sistema {
         return new int[]{val / 10, val % 10};
     }
 //________________________________________________________________
-    private void Verificar(int PA, int PB) {
+    public void Verificar(int PA, int PB) {
         boolean achou = false;
         int pmp = Juntar(PA, PB);
 
+        // VERIFICAÇÃO DE ARMADILHA ENCONTRADA
         if (!Mapa[PB][PA].equals("A")) {
             for (int i = 0; i < Armadilhas.length; i++) {
                 if (pmp == Armadilhas[i]) {
@@ -151,6 +152,7 @@ public class Sistema {
             System.out.println("Coordenada já utilizada.");
         }
         
+        // VERIFICAÇÃO DE TESOURO ENCONTRADA
         if (!Mapa[PB][PA].equals("T")) {
             for (int i2 = 0; i2 < Tesouros.length; i2++) {
                 if (pmp == Tesouros[i2]) {
@@ -170,6 +172,7 @@ public class Sistema {
             System.out.println("Coordenada já utilizada.");
         }
 
+        // VERIFICAÇÃO DE AREIA ENCONTRADA
         if (!Mapa[PB][PA].equals("O")) {
             if (!achou) {
                 System.out.println("\nApenas areia..."); 
@@ -177,6 +180,7 @@ public class Sistema {
                 tentativa++; 
             } 
         }
+        // COORDENADA JÁ UTILIZADA
         else {
             System.out.println("Coordenada já utilizada.");
         }
