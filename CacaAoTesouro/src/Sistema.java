@@ -10,7 +10,6 @@ public class Sistema {
 
     int Armadilhas[] = new int[5];
     int Tesouros[] = new int[8];
-    String MapaFim[][] = new String[8][8];
     String Mapa[][] = new String[8][8];
     //         Li Co
 
@@ -66,8 +65,7 @@ public class Sistema {
             System.out.println();
         }
 
-        
-    
+
     }
 //________________________________________________________________
     public void MostrarMapaDesvendado() {
@@ -99,13 +97,14 @@ public class Sistema {
             do {
                 linha = rng.nextInt(Mapa.length);
                 coluna = rng.nextInt(Mapa.length);
+                Tesouros[i] = (linha * 10) + coluna;
             } while (!Mapa[linha][coluna].equals("~"));
             
-            Tesouros[i] = (linha * 10) + coluna;
+            
             //Mapa[linha][coluna] = "T"; 
             
             //usar pra printar "tela de vitória"
-            //System.out.println(Tesouros[i]);
+            System.out.println(Tesouros[i]);
         }
 
     }
@@ -117,9 +116,10 @@ public class Sistema {
             do {
                 linha = rng.nextInt(Mapa.length);
                 coluna = rng.nextInt(Mapa.length);
+                Armadilhas[i] = (linha * 10) + coluna;
             } while (!Mapa[linha][coluna].equals("~"));
 
-            Armadilhas[i] = (linha * 10) + coluna;
+            
             //Mapa[linha][coluna] = "A";     
         }
         

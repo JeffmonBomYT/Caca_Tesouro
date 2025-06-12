@@ -41,7 +41,7 @@ public class Jogo {
             System.exit(1);
         }
         
-
+        scan.close();
     }
 }
 
